@@ -74,18 +74,30 @@ def gerar_mapa_chuva(url, titulo, excluir_prefixos):
 
     # Definindo colormap e intervalos
     cmap = ListedColormap([
-        "#ffffff","#add8e6", "#b3cde0", "#6497b1",
-        "#005b96", "#03396c", "#011f4b", "#000000"
+        "#ffffff00",
+        "#0080AA",
+        "#0000B3",
+        "#00CC7F",
+        "#558000", 
+        "#005500",
+        "#FFFF00",
+        "#FFCC00",
+        "#FF9900",
+        "#D55500",
+        "#FFBBFF",
+        "#FF2B80",
+        "#8000AA"
+
     ])
 
-    bounds = [0, 5, 10, 15, 20, 30, 50, 75, 100]
+    bounds = [0, 2, 3, 5, 7, 10, 15, 20, 25,  30, 40,  50, 75, 100]
     norm = BoundaryNorm(bounds, cmap.N)
 
     # Criando a figura
     fig, ax = plt.subplots(figsize=(15, 10))
 
     # Plotando a fronteira do estado de São Paulo
-    sp_border.plot(ax=ax, edgecolor='black', facecolor='none', linewidth=0.2)
+    sp_border.plot(ax=ax, edgecolor='black', facecolor='none', linewidth=0.3)
 
     # Plotando o mapa interpolado
     c = ax.imshow(
@@ -96,13 +108,13 @@ def gerar_mapa_chuva(url, titulo, excluir_prefixos):
     )
 
     # Barra de cores
-    cbar = plt.colorbar(c, ax=ax, ticks=bounds, spacing='proportional')
+    cbar = plt.colorbar(c, ax=ax, ticks=bounds, spacing='uniform', shrink=0.8)
     cbar.set_label('mm', fontsize=8)
 
     # Configurando título e limites dos eixos
     date = (datetime.now() - timedelta(hours=3)).strftime('%d/%m/%Y %H:%M')
     ax.set_title(f'{titulo}\n{date}', fontsize=14)
-    ax.grid(which='both', linestyle='--', linewidth=0.5, color='gray', alpha=0.7)
+    ax.grid(which='both', linestyle='--', linewidth=0.5, color='gray', alpha=0.6)
     ax.tick_params(axis='both', which='major', labelsize=8)
     ax.set_xlim([minx, maxx])
     ax.set_ylim([miny, maxy])
@@ -139,9 +151,13 @@ def gerar_mapa_chuva(url, titulo, excluir_prefixos):
 
 # URLs e títulos para diferentes intervalos
 intervalos = [
-    ("https://cth.daee.sp.gov.br/sibh/api/v1/measurements/last_hours_events?hours=1&show_all=true", "CHUVAS DA ÚLTIMA 1H"),
-    ("https://cth.daee.sp.gov.br/sibh/api/v1/measurements/last_hours_events?hours=24&show_all=true", "CHUVAS DAS ÚLTIMAS 24H"),
-    ("https://cth.daee.sp.gov.br/sibh/api/v1/measurements/last_hours_events?hours=48&show_all=true", "CHUVAS DAS ÚLTIMAS 48H"),
+    ("https://cth.daee.sp.gov.br/sibh/api/v1/measurements/last_hours_events?hours=1&show_all=true", "ACUMULADO DE CHUVAS DA ÚLTIMA 1H"),
+    ("https://cth.daee.sp.gov.br/sibh/api/v1/measurements/last_hours_events?hours=2&show_all=true", "ACUMULADO DE CHUVAS DAS ÚLTIMAS 2H"),
+    ("https://cth.daee.sp.gov.br/sibh/api/v1/measurements/last_hours_events?hours=3&show_all=true", "ACUMULADO DE CHUVAS DAS ÚLTIMAS 3H"),
+    ("https://cth.daee.sp.gov.br/sibh/api/v1/measurements/last_hours_events?hours=12&show_all=true", "ACUMULADO DE CHUVAS DAS ÚLTIMAS 12H"),
+    ("https://cth.daee.sp.gov.br/sibh/api/v1/measurements/last_hours_events?hours=24&show_all=true", "ACUMULADO DE CHUVAS DAS ÚLTIMAS 24H"),
+    ("https://cth.daee.sp.gov.br/sibh/api/v1/measurements/last_hours_events?hours=48&show_all=true", "ACUMULADO DE CHUVAS DAS ÚLTIMAS 48H"),
+    ("https://cth.daee.sp.gov.br/sibh/api/v1/measurements/last_hours_events?hours=72&show_all=true", "ACUMULADO DE CHUVAS DAS ÚLTIMAS 72H")
 ]
 
 # Gerando mapas para cada intervalo
