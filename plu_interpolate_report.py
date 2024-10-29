@@ -16,7 +16,7 @@ excluir_prefixos = [prefix.strip() for prefix in excluir_prefixos.split(",")] if
 # Função para carregar e processar os dados de cada URL
 def gerar_mapa_chuva(url, titulo, excluir_prefixos):
     # Carregando a fronteira do estado de São Paulo
-    sp_border = gpd.read_file('/content/drive/MyDrive/dados/mun/DIV_MUN_SP_2021a.shp')
+    sp_border = gpd.read_file('data/DIV_MUN_IGC_SP_2021/DIV_MUN_SP_2021a.shp')
     sp_border = sp_border.to_crs(epsg=4326)
 
     # Obtendo os limites do estado de São Paulo
@@ -91,10 +91,11 @@ def gerar_mapa_chuva(url, titulo, excluir_prefixos):
     ])
 
     bounds = [0, 2, 3, 5, 7, 10, 15, 20, 25,  30, 40,  50, 75, 100]
+    
     norm = BoundaryNorm(bounds, cmap.N)
 
     # Criando a figura
-    fig, ax = plt.subplots(figsize=(15, 10))
+    fig, ax = plt.subplots(figsize=(16, 10))
 
     # Plotando a fronteira do estado de São Paulo
     sp_border.plot(ax=ax, edgecolor='black', facecolor='none', linewidth=0.3)
@@ -108,7 +109,7 @@ def gerar_mapa_chuva(url, titulo, excluir_prefixos):
     )
 
     # Barra de cores
-    cbar = plt.colorbar(c, ax=ax, ticks=bounds, spacing='uniform', shrink=0.8)
+    cbar = plt.colorbar(c, ax=ax, ticks=bounds, spacing='proporcional', shrink=0.8)
     cbar.set_label('mm', fontsize=8)
 
     # Configurando título e limites dos eixos
@@ -120,7 +121,7 @@ def gerar_mapa_chuva(url, titulo, excluir_prefixos):
     ax.set_ylim([miny, maxy])
 
     # Carregando o logotipo
-    logo_path = "/content/drive/MyDrive/logo/logo_spaguas.png"
+    logo_path = "logo\logo1.png"
     logo = Image.open(logo_path)
 
     # Adicionando o logotipo no gráfico
