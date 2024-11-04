@@ -205,12 +205,16 @@ Valores em graus, a cada 10km equivale 0.09
 
     plt.show()
 
-# URLs e títulos para diferentes intervalos
 intervalos = [
     #("https://cth.daee.sp.gov.br/sibh/api/v1/measurements/last_hours_events?hours=1&show_all=true", "ACUMULADO DE CHUVA DA ÚLTIMA 1H"),
+    #("https://cth.daee.sp.gov.br/sibh/api/v1/measurements/last_hours_events?hours=2&show_all=true", "ACUMULADO DE CHUVA DA ÚLTIMAS 2H"),
+    #("https://cth.daee.sp.gov.br/sibh/api/v1/measurements/last_hours_events?hours=3&show_all=true", "ACUMULADO DE CHUVA DA ÚLTIMAS 3H"),
+    #("https://cth.daee.sp.gov.br/sibh/api/v1/measurements/last_hours_events?hours=12&show_all=true", "ACUMULADO DE CHUVA DA ÚLTIMAS 12H"),
     ("https://cth.daee.sp.gov.br/sibh/api/v1/measurements/last_hours_events?hours=24&show_all=true","ACUMULADO DE CHUVA DAS ÚLTIMAS 24H"),
+    #("https://cth.daee.sp.gov.br/sibh/api/v1/measurements/last_hours_events?hours=48&show_all=true", "ACUMULADO DE CHUVA DA ÚLTIMAS 48H"),
     #("https://cth.daee.sp.gov.br/sibh/api/v1/measurements/last_hours_events?hours=72&show_all=true", "ACUMULADO DE CHUVA DAS ÚLTIMAS 72H")
 ]
+
 
 # Gerando mapas para cada intervalo
 for url, titulo in intervalos:
