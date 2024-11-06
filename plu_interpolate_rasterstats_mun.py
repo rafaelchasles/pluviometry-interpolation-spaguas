@@ -106,6 +106,14 @@ while estatistica_desejada not in ["max", "mean", "median"]:
 # Calcular a estatística de precipitação por município
 municipios_stats = calcular_estatistica_por_municipio(cropped_raster, municipios_shapefile, estatistica=estatistica_desejada)
 
+hoje = datetime.now()
+hoje_format = hoje.strftime('%Y-%m-%d')
+
+ontem = hoje - timedelta(days=1)
+ontem_format = ontem.strftime('%Y-%m-%d')
+
+
+
 # Plotar o mapa da estatística de precipitação por município
 titulo_mapa = f"Acumulado de chuvas 24H por Município\n07:00h de {ontem_format} às 07:00h de {hoje_format}"
 plotar_mapa_por_municipio(municipios_stats, titulo_mapa)
