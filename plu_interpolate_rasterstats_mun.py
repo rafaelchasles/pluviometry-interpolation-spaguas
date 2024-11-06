@@ -5,6 +5,7 @@ from matplotlib.colors import BoundaryNorm, ListedColormap
 import os
 from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 from PIL import Image
+import datetime
 
 def calcular_estatistica_por_municipio(raster_path, municipios_shapefile, estatistica="max"):
     # Carregar o shapefile de municípios
